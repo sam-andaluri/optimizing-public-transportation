@@ -149,6 +149,28 @@ Open:
 http://localhost:3000
 ```
 
+## Capture Evidence
+
+After the stack, simulation, Faust worker, and UI have been running for a minute, capture the project checks into an `outputs/` folder:
+
+```bash
+./scripts/collect_rubric_evidence.sh
+```
+
+The script creates a timestamped folder such as:
+
+```text
+outputs/rubric-evidence-20260616-103000/
+```
+
+Each file contains the command that was run, the command output, and the exit status. The checks cover Kafka topics, sample messages, Schema Registry subjects, Kafka Connect configuration, Faust output, KSQL tables, and the UI HTTP response.
+
+To choose a specific output folder:
+
+```bash
+./scripts/collect_rubric_evidence.sh outputs/local-run-evidence
+```
+
 ## Cleanup
 
 Stop containers but keep Kafka/Postgres data:

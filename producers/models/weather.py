@@ -30,6 +30,14 @@ class Weather(Producer):
     winter_months = set((1, 2, 3, 10, 11, 12))
     summer_months = set((6, 7, 8))
 
+    @staticmethod
+    def temperature_bounds(month):
+        if month in Weather.winter_months:
+            return 0.0, 55.0
+        if month in Weather.summer_months:
+            return 55.0, 100.0
+        return 30.0, 85.0
+
     def __init__(self, month):
         if Weather.key_schema is None:
             with open(f"{Path(__file__).parents[0]}/schemas/weather_key.json") as f:
@@ -61,7 +69,9 @@ class Weather(Producer):
             mode = -1.0
         elif month in Weather.summer_months:
             mode = 1.0
-        self.temp += min(max(-20.0, random.triangular(-10.0, 10.0, mode)), 100.0)
+        low, high = Weather.temperature_bounds(month)
+        delta = max(-20.0, min(20.0, random.triangular(-10.0, 10.0, mode)))
+        self.temp = max(low, min(high, self.temp + delta))
         self.status = random.choice(list(Weather.status))
 
     def run(self, month):
