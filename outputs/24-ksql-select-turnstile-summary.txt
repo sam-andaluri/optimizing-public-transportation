@@ -1,0 +1,17 @@
+# KSQL turnstile summary rows with station IDs and counts
+
+$ ksql_query 'SELECT * FROM TURNSTILE_SUMMARY EMIT CHANGES LIMIT 10;'
+
+{"queryId":"transient_TURNSTILE_SUMMARY_8021092410802961687","columnNames":["STATION_ID","COUNT"],"columnTypes":["INTEGER","INTEGER"]}
+[40030,5587]
+[41670,3748]
+[40130,4882]
+[41170,12672]
+[41080,4113]
+[41330,12741]
+[40490,11140]
+[40430,14831]
+[41200,11974]
+[40650,22356]
+
+# exit status: 0

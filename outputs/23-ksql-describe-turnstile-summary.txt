@@ -1,0 +1,82 @@
+# KSQL TURNSTILE_SUMMARY table description
+
+$ ksql_post 'DESCRIBE TURNSTILE_SUMMARY;'
+
+[
+    {
+        "@type": "sourceDescription",
+        "statementText": "DESCRIBE TURNSTILE_SUMMARY;",
+        "sourceDescription": {
+            "name": "TURNSTILE_SUMMARY",
+            "windowType": null,
+            "readQueries": [],
+            "writeQueries": [
+                {
+                    "queryString": "CREATE TABLE TURNSTILE_SUMMARY WITH (CLEANUP_POLICY='compact', KAFKA_TOPIC='TURNSTILE_SUMMARY', PARTITIONS=1, REPLICAS=1, RETENTION_MS=604800000, VALUE_FORMAT='JSON') AS SELECT\n  TURNSTILE_EVENTS.STATION_ID STATION_ID,\n  CAST(COUNT(TURNSTILE_EVENTS.STATION_ID) AS INTEGER) COUNT\nFROM TURNSTILE_EVENTS TURNSTILE_EVENTS\nGROUP BY TURNSTILE_EVENTS.STATION_ID\nEMIT CHANGES;",
+                    "sinks": [
+                        "TURNSTILE_SUMMARY"
+                    ],
+                    "sinkKafkaTopics": [
+                        "TURNSTILE_SUMMARY"
+                    ],
+                    "id": "CTAS_TURNSTILE_SUMMARY_15",
+                    "statusCount": {
+                        "RUNNING": 1
+                    },
+                    "queryType": "PERSISTENT",
+                    "state": "RUNNING"
+                }
+            ],
+            "fields": [
+                {
+                    "name": "STATION_ID",
+                    "schema": {
+                        "type": "INTEGER",
+                        "fields": null,
+                        "memberSchema": null
+                    },
+                    "type": "KEY"
+                },
+                {
+                    "name": "COUNT",
+                    "schema": {
+                        "type": "INTEGER",
+                        "fields": null,
+                        "memberSchema": null
+                    }
+                }
+            ],
+            "type": "TABLE",
+            "timestamp": "",
+            "statistics": "",
+            "errorStats": "",
+            "extended": false,
+            "keyFormat": "KAFKA",
+            "valueFormat": "JSON",
+            "topic": "TURNSTILE_SUMMARY",
+            "partitions": 1,
+            "replication": 1,
+            "statement": "CREATE TABLE TURNSTILE_SUMMARY WITH (CLEANUP_POLICY='compact', KAFKA_TOPIC='TURNSTILE_SUMMARY', PARTITIONS=1, REPLICAS=1, RETENTION_MS=604800000, VALUE_FORMAT='JSON') AS SELECT\n  TURNSTILE_EVENTS.STATION_ID STATION_ID,\n  CAST(COUNT(TURNSTILE_EVENTS.STATION_ID) AS INTEGER) COUNT\nFROM TURNSTILE_EVENTS TURNSTILE_EVENTS\nGROUP BY TURNSTILE_EVENTS.STATION_ID\nEMIT CHANGES;",
+            "queryOffsetSummaries": [],
+            "sourceConstraints": [],
+            "clusterStatistics": [
+                {
+                    "name": "messages-per-sec",
+                    "host": "ksql-server:8088",
+                    "value": 12.866153892437751,
+                    "timestamp": 1781624724722
+                },
+                {
+                    "name": "total-messages",
+                    "host": "ksql-server:8088",
+                    "value": 27369.0,
+                    "timestamp": 1781624724722
+                }
+            ],
+            "clusterErrorStats": []
+        },
+        "warnings": []
+    }
+]
+
+# exit status: 0

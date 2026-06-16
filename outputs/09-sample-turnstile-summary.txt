@@ -1,0 +1,17 @@
+# Sample KSQL turnstile summary records
+
+$ consume_topic 'TURNSTILE_SUMMARY' 10 20
+
+{"COUNT":121}
+{"COUNT":893}
+{"COUNT":1128}
+{"COUNT":1144}
+{"COUNT":706}
+{"COUNT":472}
+{"COUNT":2383}
+{"COUNT":1484}
+{"COUNT":1340}
+{"COUNT":525}
+Processed a total of 10 messages
+
+# exit status: 0

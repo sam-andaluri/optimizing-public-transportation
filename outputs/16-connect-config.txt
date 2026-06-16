@@ -1,0 +1,26 @@
+# Kafka Connect stations connector configuration
+
+$ json_get http://localhost:8083/connectors/stations/config
+
+{
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "incrementing.column.name": "stop_id",
+    "transforms.createKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "connection.password": "chicago",
+    "transforms": "createKey",
+    "batch.max.rows": "500",
+    "table.whitelist": "stations",
+    "mode": "incrementing",
+    "key.converter.schemas.enable": "false",
+    "topic.prefix": "org.chicago.cta.",
+    "connection.user": "cta_admin",
+    "transforms.createKey.fields": "stop_id",
+    "poll.interval.ms": "86400000",
+    "value.converter.schemas.enable": "false",
+    "name": "stations",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "connection.url": "jdbc:postgresql://localhost:5432/cta",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter"
+}
+
+# exit status: 0

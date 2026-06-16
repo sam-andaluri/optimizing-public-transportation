@@ -1,0 +1,11 @@
+# Station rows in Postgres
+
+$ compose exec -T postgres psql -U cta_admin -d cta -c SELECT\ COUNT\(\*\)\ FROM\ stations\;
+
+ count 
+-------
+   230
+(1 row)
+
+
+# exit status: 0

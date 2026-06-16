@@ -1,0 +1,17 @@
+# Sample station records loaded by Kafka Connect
+
+$ consume_topic 'org.chicago.cta.stations' 10 20
+
+{"stop_id":30001,"direction_id":"E","stop_name":"Austin (O'Hare-bound)","station_name":"Austin","station_descriptive_name":"Austin (Blue Line)","station_id":40010,"order":29,"red":false,"blue":true,"green":false}
+{"stop_id":30002,"direction_id":"W","stop_name":"Austin (Forest Pk-bound)","station_name":"Austin","station_descriptive_name":"Austin (Blue Line)","station_id":40010,"order":29,"red":false,"blue":true,"green":false}
+{"stop_id":30003,"direction_id":"E","stop_name":"Harlem (63rd-bound)","station_name":"Harlem/Lake","station_descriptive_name":"Harlem/Lake (Green Line)","station_id":40020,"order":0,"red":false,"blue":false,"green":true}
+{"stop_id":30004,"direction_id":"W","stop_name":"Harlem (Terminal arrival)","station_name":"Harlem/Lake","station_descriptive_name":"Harlem/Lake (Green Line)","station_id":40020,"order":0,"red":false,"blue":false,"green":true}
+{"stop_id":30005,"direction_id":"E","stop_name":"Pulaski (63rd-bound)","station_name":"Pulaski","station_descriptive_name":"Pulaski (Green Line)","station_id":40030,"order":7,"red":false,"blue":false,"green":true}
+{"stop_id":30006,"direction_id":"W","stop_name":"Pulaski (Harlem-bound)","station_name":"Pulaski","station_descriptive_name":"Pulaski (Green Line)","station_id":40030,"order":7,"red":false,"blue":false,"green":true}
+{"stop_id":30009,"direction_id":"W","stop_name":"Cicero (Harlem-bound)","station_name":"Cicero","station_descriptive_name":"Cicero (Green Line)","station_id":40480,"order":6,"red":false,"blue":false,"green":true}
+{"stop_id":30012,"direction_id":"N","stop_name":"Belmont (O'Hare Branch) (O'Hare-bound)","station_name":"Belmont","station_descriptive_name":"Belmont (Blue Line)","station_id":40060,"order":8,"red":false,"blue":true,"green":false}
+{"stop_id":30013,"direction_id":"S","stop_name":"Belmont (O'Hare Branch) (Forest Pk-bound)","station_name":"Belmont","station_descriptive_name":"Belmont (Blue Line)","station_id":40060,"order":8,"red":false,"blue":true,"green":false}
+{"stop_id":30014,"direction_id":"N","stop_name":"Jackson/Dearborn (O'Hare-bound)","station_name":"Jackson","station_descriptive_name":"Jackson (Blue Line)","station_id":40070,"order":19,"red":false,"blue":true,"green":false}
+Processed a total of 10 messages
+
+# exit status: 0

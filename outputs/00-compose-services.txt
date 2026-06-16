@@ -1,0 +1,14 @@
+# Compose service status
+
+$ compose ps
+
+CONTAINER ID  IMAGE                                            COMMAND               CREATED      STATUS                 PORTS                                       NAMES
+7ec9e5a57032  docker.io/confluentinc/cp-zookeeper:7.6.1        /etc/confluent/do...  2 hours ago  Up 2 hours (starting)  0.0.0.0:2181->2181/tcp, 2888/tcp, 3888/tcp  cta-zookeeper
+c9ff23cbf621  docker.io/library/postgres:10                    postgres              2 hours ago  Up 2 hours (starting)  0.0.0.0:5432->5432/tcp                      cta-postgres
+716ae91402d5  docker.io/confluentinc/cp-kafka:7.6.1            /etc/confluent/do...  2 hours ago  Up 2 hours (starting)  0.0.0.0:9092->9092/tcp                      cta-kafka
+a6a0745500ee  docker.io/confluentinc/cp-schema-registry:7.6.1  /etc/confluent/do...  2 hours ago  Up 2 hours (starting)  0.0.0.0:8081->8081/tcp                      cta-schema-registry
+8bf32d60af25  docker.io/confluentinc/cp-kafka-rest:7.6.1       /etc/confluent/do...  2 hours ago  Up 2 hours (starting)  0.0.0.0:8082->8082/tcp                      cta-kafka-rest
+0cda80d8b1ac  docker.io/confluentinc/cp-ksqldb-server:7.6.1    /etc/confluent/do...  2 hours ago  Up 2 hours (starting)  0.0.0.0:8088->8088/tcp                      cta-ksql-server
+dc8ef6089a03  localhost/project-2_connect:latest               /etc/confluent/do...  2 hours ago  Up 2 hours (starting)  0.0.0.0:8083->8083/tcp, 9092/tcp            cta-connect
+
+# exit status: 0

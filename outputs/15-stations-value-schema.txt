@@ -1,0 +1,12 @@
+# Kafka Connect stations value schema
+
+$ json_get http://localhost:8081/subjects/org.chicago.cta.stations-value/versions/latest
+
+{
+    "subject": "org.chicago.cta.stations-value",
+    "version": 1,
+    "id": 4,
+    "schema": "{\"type\":\"record\",\"name\":\"StationValue\",\"namespace\":\"com.udacity\",\"fields\":[{\"name\":\"stop_id\",\"type\":\"int\"},{\"name\":\"direction_id\",\"type\":\"string\"},{\"name\":\"stop_name\",\"type\":\"string\"},{\"name\":\"station_name\",\"type\":\"string\"},{\"name\":\"station_descriptive_name\",\"type\":\"string\"},{\"name\":\"station_id\",\"type\":\"int\"},{\"name\":\"order\",\"type\":\"int\"},{\"name\":\"red\",\"type\":\"boolean\"},{\"name\":\"blue\",\"type\":\"boolean\"},{\"name\":\"green\",\"type\":\"boolean\"}]}"
+}
+
+# exit status: 0

@@ -1,0 +1,12 @@
+# Weather value schema
+
+$ json_get http://localhost:8081/subjects/org.chicago.cta.weather.v1-value/versions/latest
+
+{
+    "subject": "org.chicago.cta.weather.v1-value",
+    "version": 1,
+    "id": 6,
+    "schema": "{\"type\":\"record\",\"name\":\"WeatherValue\",\"namespace\":\"com.udacity\",\"fields\":[{\"name\":\"temperature\",\"type\":\"double\"},{\"name\":\"status\",\"type\":\"string\"}]}"
+}
+
+# exit status: 0

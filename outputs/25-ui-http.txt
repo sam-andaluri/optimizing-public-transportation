@@ -1,0 +1,13 @@
+# Transit Status UI HTTP response
+
+$ curl -fsS -D - -o /dev/null http://localhost:3000/
+
+HTTP/1.1 200 OK
+Server: TornadoServer/6.2
+Content-Type: text/html; charset=UTF-8
+Date: Tue, 16 Jun 2026 15:45:29 GMT
+Etag: "5725f30836716593af5403fffee03be0ce71e97b"
+Content-Length: 12069
+
+
+# exit status: 0

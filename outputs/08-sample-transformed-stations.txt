@@ -1,0 +1,17 @@
+# Sample transformed station records produced by Faust
+
+$ consume_topic 'org.chicago.cta.stations.table.v1' 10 20
+
+{"station_id": 40010, "station_name": "Austin", "order": 29, "line": "blue", "__faust": {"ns": "consumers.faust_stream.TransformedStation"}}
+{"station_id": 40010, "station_name": "Austin", "order": 29, "line": "blue", "__faust": {"ns": "consumers.faust_stream.TransformedStation"}}
+{"station_id": 40020, "station_name": "Harlem/Lake", "order": 0, "line": "green", "__faust": {"ns": "consumers.faust_stream.TransformedStation"}}
+{"station_id": 40020, "station_name": "Harlem/Lake", "order": 0, "line": "green", "__faust": {"ns": "consumers.faust_stream.TransformedStation"}}
+{"station_id": 40030, "station_name": "Pulaski", "order": 7, "line": "green", "__faust": {"ns": "consumers.faust_stream.TransformedStation"}}
+{"station_id": 40030, "station_name": "Pulaski", "order": 7, "line": "green", "__faust": {"ns": "consumers.faust_stream.TransformedStation"}}
+{"station_id": 40480, "station_name": "Cicero", "order": 6, "line": "green", "__faust": {"ns": "consumers.faust_stream.TransformedStation"}}
+{"station_id": 40060, "station_name": "Belmont", "order": 8, "line": "blue", "__faust": {"ns": "consumers.faust_stream.TransformedStation"}}
+{"station_id": 40060, "station_name": "Belmont", "order": 8, "line": "blue", "__faust": {"ns": "consumers.faust_stream.TransformedStation"}}
+{"station_id": 40070, "station_name": "Jackson", "order": 19, "line": "blue", "__faust": {"ns": "consumers.faust_stream.TransformedStation"}}
+Processed a total of 10 messages
+
+# exit status: 0

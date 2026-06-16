@@ -1,0 +1,9 @@
+# Arrival topics by train line
+
+$ compose exec -T kafka kafka-topics --bootstrap-server kafka:29092 --list | awk '/org\.chicago\.cta\.station\.arrivals\.blue\./ {blue++} /org\.chicago\.cta\.station\.arrivals\.green\./ {green++} /org\.chicago\.cta\.station\.arrivals\.red\./ {red++} END {print "blue=" blue+0; print "green=" green+0; print "red=" red+0}'
+
+blue=32
+green=28
+red=34
+
+# exit status: 0

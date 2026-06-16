@@ -1,0 +1,12 @@
+# Turnstile value schema
+
+$ json_get http://localhost:8081/subjects/org.chicago.cta.station.turnstile.v1-value/versions/latest
+
+{
+    "subject": "org.chicago.cta.station.turnstile.v1-value",
+    "version": 1,
+    "id": 7,
+    "schema": "{\"type\":\"record\",\"name\":\"TurnstileValue\",\"namespace\":\"com.udacity\",\"fields\":[{\"name\":\"station_id\",\"type\":\"int\"},{\"name\":\"station_name\",\"type\":\"string\"},{\"name\":\"line\",\"type\":\"string\"}]}"
+}
+
+# exit status: 0

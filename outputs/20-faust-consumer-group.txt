@@ -1,0 +1,11 @@
+# Faust consumer group on stations topic
+
+$ compose exec -T kafka kafka-consumer-groups --bootstrap-server kafka:29092 --describe --group stations-stream 2>/dev/null || compose exec -T kafka kafka-consumer-groups --bootstrap-server kafka:29092 --list | grep -i faust
+
+
+GROUP           TOPIC                               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                      HOST            CLIENT-ID
+stations-stream org.chicago.cta.stations            0          229             230             1               faust-1.7.4-be7e91e9-b782-4801-a8ef-791b6e61cb8e /10.89.0.4      faust-1.7.4
+stations-stream org.chicago.cta.stations.table.v1   0          -               188             -               faust-1.7.4-be7e91e9-b782-4801-a8ef-791b6e61cb8e /10.89.0.4      faust-1.7.4
+stations-stream stations-stream-__assignor-__leader 0          -               0               -               faust-1.7.4-be7e91e9-b782-4801-a8ef-791b6e61cb8e /10.89.0.4      faust-1.7.4
+
+# exit status: 0
