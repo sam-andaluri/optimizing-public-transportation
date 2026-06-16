@@ -15,11 +15,22 @@ KSQL_URL = os.getenv("KSQL_URL", "http://localhost:8088")
 
 KSQL_STATEMENTS = [
     """
-CREATE STREAM turnstile
+CREATE STREAM turnstile_events
 WITH (
     KAFKA_TOPIC='org.chicago.cta.station.turnstile.v1',
     VALUE_FORMAT='AVRO'
 );
+""",
+    """
+CREATE TABLE turnstile
+WITH (
+    KAFKA_TOPIC='TURNSTILE',
+    VALUE_FORMAT='JSON'
+) AS
+    SELECT STATION_ID, CAST(COUNT(STATION_ID) AS INTEGER) AS count
+    FROM turnstile_events
+    GROUP BY STATION_ID
+    EMIT CHANGES;
 """,
     """
 CREATE TABLE turnstile_summary
@@ -28,7 +39,7 @@ WITH (
     VALUE_FORMAT='JSON'
 ) AS
     SELECT STATION_ID, CAST(COUNT(STATION_ID) AS INTEGER) AS count
-    FROM turnstile
+    FROM turnstile_events
     GROUP BY STATION_ID
     EMIT CHANGES;
 """,
@@ -37,7 +48,10 @@ WITH (
 
 def execute_statement():
     """Executes the KSQL statement against the KSQL API"""
-    if topic_check.topic_exists("TURNSTILE_SUMMARY") is True:
+    if (
+        topic_check.topic_exists("TURNSTILE") is True
+        and topic_check.topic_exists("TURNSTILE_SUMMARY") is True
+    ):
         return
 
     logging.debug("executing ksql statement...")
