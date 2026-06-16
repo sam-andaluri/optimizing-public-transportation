@@ -2,4 +2,4 @@
 # These pins avoid older packages that do not build cleanly on Apple Silicon.
 confluent-kafka[avro]==1.9.2
 faust==1.7.4
-tornado==6.2
+tornado==6.5.7
