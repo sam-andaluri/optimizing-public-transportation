@@ -149,6 +149,18 @@ Open:
 http://localhost:3000
 ```
 
+If another local app is already using port `3000`, choose a different UI port:
+
+```bash
+TRANSIT_STATUS_PORT=3001 python consumers/server.py
+```
+
+Then open:
+
+```text
+http://localhost:3001
+```
+
 ## Capture Evidence
 
 After the stack, simulation, Faust worker, and UI have been running for a minute, capture the project checks into an `outputs/` folder:
@@ -200,3 +212,5 @@ podman-compose down -v
 podman-compose up -d --build
 ./scripts/verify_docker_stack.sh
 ```
+
+If KSQL has old local objects from a previous run, the cleanest local reset is the same volume reset above. Recreate the stack, then start the simulation, Faust worker, and UI again in that order.

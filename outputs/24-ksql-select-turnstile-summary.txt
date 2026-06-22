@@ -1,17 +1,25 @@
 # KSQL turnstile summary rows with station IDs and counts
 
-$ ksql_query 'SELECT * FROM TURNSTILE_SUMMARY EMIT CHANGES LIMIT 10;'
+$ compose exec -T ksql-server ksql http://ksql-server:8088 --execute 'SELECT * FROM TURNSTILE_SUMMARY LIMIT 10;'
 
-{"queryId":"transient_TURNSTILE_SUMMARY_8021092410802961687","columnNames":["STATION_ID","COUNT"],"columnTypes":["INTEGER","INTEGER"]}
-[40030,5587]
-[41670,3748]
-[40130,4882]
-[41170,12672]
-[41080,4113]
-[41330,12741]
-[40490,11140]
-[40430,14831]
-[41200,11974]
-[40650,22356]
+Jun 22, 2026 5:31:13 PM org.jline.utils.Log logr
+WARNING: Unable to create a system terminal, creating a dumb terminal (enable debug logging for more information)
++-----+-----+-----+
+|STATI|STATI|COUNT|
+|ON_ID|ON_ID|     |
+|     |_VALU|     |
+|     |E    |     |
++-----+-----+-----+
+|41280|41280|1    |
+|40320|40320|1    |
+|41090|41090|1    |
+|41410|41410|1    |
+|40130|40130|1    |
+|40450|40450|1    |
+|40770|40770|1    |
+|41220|41220|1    |
+|40260|40260|1    |
+|40900|40900|1    |
+Query terminated
 
 # exit status: 0

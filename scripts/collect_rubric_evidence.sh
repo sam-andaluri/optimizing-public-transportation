@@ -95,15 +95,6 @@ ksql_post() {
     http://localhost:8088/ksql | python -m json.tool
 }
 
-ksql_query() {
-  local query="$1"
-  curl -fsS \
-    -X POST \
-    -H "Content-Type: application/vnd.ksql.v1+json" \
-    --data "{\"ksql\":\"${query}\",\"streamsProperties\":{\"ksql.streams.auto.offset.reset\":\"earliest\"}}" \
-    http://localhost:8088/query
-}
-
 first_topic_matching() {
   local pattern="$1"
   compose exec -T kafka kafka-topics --bootstrap-server kafka:29092 --list \
@@ -187,7 +178,7 @@ run_shell "22-ksql-describe-turnstile" "KSQL TURNSTILE table description" \
 run_shell "23-ksql-describe-turnstile-summary" "KSQL TURNSTILE_SUMMARY table description" \
   "ksql_post 'DESCRIBE TURNSTILE_SUMMARY;'"
 run_shell "24-ksql-select-turnstile-summary" "KSQL turnstile summary rows with station IDs and counts" \
-  "ksql_query 'SELECT * FROM TURNSTILE_SUMMARY EMIT CHANGES LIMIT 10;'"
+  "compose exec -T ksql-server ksql http://ksql-server:8088 --execute 'SELECT * FROM TURNSTILE_SUMMARY LIMIT 10;'"
 
 run_shell "25-ui-http" "Transit Status UI HTTP response" \
   "curl -fsS -D - -o /dev/null http://localhost:3000/"

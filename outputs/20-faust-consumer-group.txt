@@ -4,8 +4,8 @@ $ compose exec -T kafka kafka-consumer-groups --bootstrap-server kafka:29092 --d
 
 
 GROUP           TOPIC                               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                      HOST            CLIENT-ID
-stations-stream org.chicago.cta.stations            0          229             230             1               faust-1.7.4-be7e91e9-b782-4801-a8ef-791b6e61cb8e /10.89.0.4      faust-1.7.4
-stations-stream org.chicago.cta.stations.table.v1   0          -               188             -               faust-1.7.4-be7e91e9-b782-4801-a8ef-791b6e61cb8e /10.89.0.4      faust-1.7.4
-stations-stream stations-stream-__assignor-__leader 0          -               0               -               faust-1.7.4-be7e91e9-b782-4801-a8ef-791b6e61cb8e /10.89.0.4      faust-1.7.4
+stations-stream org.chicago.cta.stations            0          229             230             1               faust-1.7.4-deb846cb-9dff-4966-b8c4-bdfc9d9482f5 /10.89.0.4      faust-1.7.4
+stations-stream org.chicago.cta.stations.table.v1   0          -               442             -               faust-1.7.4-deb846cb-9dff-4966-b8c4-bdfc9d9482f5 /10.89.0.4      faust-1.7.4
+stations-stream stations-stream-__assignor-__leader 0          -               0               -               faust-1.7.4-deb846cb-9dff-4966-b8c4-bdfc9d9482f5 /10.89.0.4      faust-1.7.4
 
 # exit status: 0

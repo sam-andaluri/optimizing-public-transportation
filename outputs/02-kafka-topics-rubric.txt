@@ -2,10 +2,9 @@
 
 $ compose exec -T kafka kafka-topics --bootstrap-server kafka:29092 --list | sort | grep -E 'org\.chicago\.cta\.(station\.arrivals|station\.turnstile|weather|stations)|TURNSTILE|stations\.table'
 
-_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_13-Aggregate-Aggregate-Materialize-changelog
-_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_13-Aggregate-GroupBy-repartition
-_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_15-Aggregate-Aggregate-Materialize-changelog
-_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_15-Aggregate-GroupBy-repartition
+_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-Aggregate-Aggregate-Materialize-changelog
+_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-Aggregate-GroupBy-repartition
+_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-KsqlTopic-Reduce-changelog
 org.chicago.cta.station.arrivals.blue.addison.v1
 org.chicago.cta.station.arrivals.blue.austin.v1
 org.chicago.cta.station.arrivals.blue.belmont.v1
@@ -104,7 +103,6 @@ org.chicago.cta.station.turnstile.v1
 org.chicago.cta.stations
 org.chicago.cta.stations.table.v1
 org.chicago.cta.weather.v1
-TURNSTILE
 TURNSTILE_SUMMARY
 
 # exit status: 0

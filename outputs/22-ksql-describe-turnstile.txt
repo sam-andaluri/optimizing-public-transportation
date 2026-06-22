@@ -9,17 +9,16 @@ $ ksql_post 'DESCRIBE TURNSTILE;'
         "sourceDescription": {
             "name": "TURNSTILE",
             "windowType": null,
-            "readQueries": [],
-            "writeQueries": [
+            "readQueries": [
                 {
-                    "queryString": "CREATE TABLE TURNSTILE WITH (CLEANUP_POLICY='compact', KAFKA_TOPIC='TURNSTILE', PARTITIONS=1, REPLICAS=1, RETENTION_MS=604800000, VALUE_FORMAT='JSON') AS SELECT\n  TURNSTILE_EVENTS.STATION_ID STATION_ID,\n  CAST(COUNT(TURNSTILE_EVENTS.STATION_ID) AS INTEGER) COUNT\nFROM TURNSTILE_EVENTS TURNSTILE_EVENTS\nGROUP BY TURNSTILE_EVENTS.STATION_ID\nEMIT CHANGES;",
+                    "queryString": "CREATE TABLE TURNSTILE_SUMMARY WITH (CLEANUP_POLICY='compact', KAFKA_TOPIC='TURNSTILE_SUMMARY', PARTITIONS=1, REPLICAS=1, RETENTION_MS=604800000, VALUE_FORMAT='JSON') AS SELECT\n  TURNSTILE.STATION_ID STATION_ID,\n  AS_VALUE(TURNSTILE.STATION_ID) STATION_ID_VALUE,\n  COUNT(TURNSTILE.STATION_ID) COUNT\nFROM TURNSTILE TURNSTILE\nGROUP BY TURNSTILE.STATION_ID\nEMIT CHANGES;",
                     "sinks": [
-                        "TURNSTILE"
+                        "TURNSTILE_SUMMARY"
                     ],
                     "sinkKafkaTopics": [
-                        "TURNSTILE"
+                        "TURNSTILE_SUMMARY"
                     ],
-                    "id": "CTAS_TURNSTILE_13",
+                    "id": "CTAS_TURNSTILE_SUMMARY_27",
                     "statusCount": {
                         "RUNNING": 1
                     },
@@ -27,6 +26,7 @@ $ ksql_post 'DESCRIBE TURNSTILE;'
                     "state": "RUNNING"
                 }
             ],
+            "writeQueries": [],
             "fields": [
                 {
                     "name": "STATION_ID",
@@ -38,9 +38,17 @@ $ ksql_post 'DESCRIBE TURNSTILE;'
                     "type": "KEY"
                 },
                 {
-                    "name": "COUNT",
+                    "name": "STATION_NAME",
                     "schema": {
-                        "type": "INTEGER",
+                        "type": "STRING",
+                        "fields": null,
+                        "memberSchema": null
+                    }
+                },
+                {
+                    "name": "LINE",
+                    "schema": {
+                        "type": "STRING",
                         "fields": null,
                         "memberSchema": null
                     }
@@ -51,29 +59,50 @@ $ ksql_post 'DESCRIBE TURNSTILE;'
             "statistics": "",
             "errorStats": "",
             "extended": false,
-            "keyFormat": "KAFKA",
-            "valueFormat": "JSON",
-            "topic": "TURNSTILE",
+            "keyFormat": "AVRO",
+            "valueFormat": "AVRO",
+            "topic": "org.chicago.cta.station.turnstile.v1",
             "partitions": 1,
             "replication": 1,
-            "statement": "CREATE TABLE TURNSTILE WITH (CLEANUP_POLICY='compact', KAFKA_TOPIC='TURNSTILE', PARTITIONS=1, REPLICAS=1, RETENTION_MS=604800000, VALUE_FORMAT='JSON') AS SELECT\n  TURNSTILE_EVENTS.STATION_ID STATION_ID,\n  CAST(COUNT(TURNSTILE_EVENTS.STATION_ID) AS INTEGER) COUNT\nFROM TURNSTILE_EVENTS TURNSTILE_EVENTS\nGROUP BY TURNSTILE_EVENTS.STATION_ID\nEMIT CHANGES;",
+            "statement": "CREATE TABLE TURNSTILE (STATION_ID INTEGER PRIMARY KEY, STATION_NAME STRING, LINE STRING) WITH (CLEANUP_POLICY='compact', KAFKA_TOPIC='org.chicago.cta.station.turnstile.v1', KEY_FORMAT='AVRO', VALUE_FORMAT='AVRO');",
             "queryOffsetSummaries": [],
-            "sourceConstraints": [],
+            "sourceConstraints": [
+                "TURNSTILE_SUMMARY"
+            ],
             "clusterStatistics": [
                 {
-                    "name": "messages-per-sec",
+                    "name": "consumer-messages-per-sec",
                     "host": "ksql-server:8088",
-                    "value": 12.812151980014246,
-                    "timestamp": 1781624724922
+                    "value": 137.6001760898058,
+                    "timestamp": 1782149461387
                 },
                 {
-                    "name": "total-messages",
+                    "name": "consumer-total-messages",
                     "host": "ksql-server:8088",
-                    "value": 27439.0,
-                    "timestamp": 1781624724922
+                    "value": 34977.0,
+                    "timestamp": 1782149461387
+                },
+                {
+                    "name": "consumer-total-bytes",
+                    "host": "ksql-server:8088",
+                    "value": 1065948.0,
+                    "timestamp": 1782149461387
                 }
             ],
-            "clusterErrorStats": []
+            "clusterErrorStats": [
+                {
+                    "name": "consumer-failed-messages",
+                    "host": "ksql-server:8088",
+                    "value": 1179.0,
+                    "timestamp": 1782143992741
+                },
+                {
+                    "name": "consumer-failed-messages-per-sec",
+                    "host": "ksql-server:8088",
+                    "value": 0.0,
+                    "timestamp": 1782143992741
+                }
+            ]
         },
         "warnings": []
     }

@@ -32,7 +32,12 @@ class TransformedStation(faust.Record):
 
 FAUST_BROKER_URL = os.getenv("FAUST_BROKER_URL", "kafka://localhost:9092")
 
-app = faust.App("stations-stream", broker=FAUST_BROKER_URL, store="memory://")
+app = faust.App(
+    "stations-stream",
+    broker=FAUST_BROKER_URL,
+    store="memory://",
+    consumer_auto_offset_reset="earliest",
+)
 topic = app.topic("org.chicago.cta.stations", value_type=Station)
 out_topic = app.topic(
     "org.chicago.cta.stations.table.v1",
@@ -47,24 +52,29 @@ table = app.Table(
 )
 
 
-def lines_for_station(station):
-    """Returns each CTA line represented by a Kafka Connect station row."""
-    for line in ("red", "blue", "green"):
-        if getattr(station, line):
-            yield line
+def line_for_station(station):
+    """Returns the CTA line represented by a Kafka Connect station row."""
+    if station.red:
+        return "red"
+    if station.blue:
+        return "blue"
+    if station.green:
+        return "green"
+    return "unknown"
 
 
 @app.agent(topic)
 async def transform_stations(stations):
     async for station in stations:
-        for line in lines_for_station(station):
-            transformed_station = TransformedStation(
-                station_id=station.station_id,
-                station_name=station.station_name,
-                order=station.order,
-                line=line,
-            )
-            table[f"{line}-{station.station_id}"] = transformed_station
+        line_color = line_for_station(station)
+        transformed_station = TransformedStation(
+            station_id=station.station_id,
+            station_name=station.station_name,
+            order=station.order,
+            line=line_color,
+        )
+        table[station.station_id] = transformed_station
+        await out_topic.send(key=str(station.station_id), value=transformed_station)
 
 
 if __name__ == "__main__":

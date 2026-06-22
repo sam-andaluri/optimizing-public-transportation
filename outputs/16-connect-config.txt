@@ -19,7 +19,7 @@ $ json_get http://localhost:8083/connectors/stations/config
     "value.converter.schemas.enable": "false",
     "name": "stations",
     "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-    "connection.url": "jdbc:postgresql://localhost:5432/cta",
+    "connection.url": "jdbc:postgresql://postgres:5432/cta",
     "key.converter": "org.apache.kafka.connect.json.JsonConverter"
 }
 

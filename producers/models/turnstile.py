@@ -1,5 +1,4 @@
 """Creates a turnstile data producer"""
-import itertools
 import logging
 from pathlib import Path
 
@@ -17,7 +16,6 @@ class Turnstile(Producer):
     value_schema = avro.load(
         f"{Path(__file__).parents[0]}/schemas/turnstile_value.json"
     )
-    entry_sequence = itertools.count()
 
     def __init__(self, station):
         """Create the Turnstile"""
@@ -35,10 +33,9 @@ class Turnstile(Producer):
         """Simulates riders entering through the turnstile."""
         num_entries = self.turnstile_hardware.get_entries(timestamp, time_step)
         for _ in range(num_entries):
-            event_id = self.time_millis() * 1000000 + next(Turnstile.entry_sequence)
             self.producer.produce(
                 topic=self.topic_name,
-                key={"timestamp": event_id},
+                key=self.station.station_id,
                 value={
                     "station_id": self.station.station_id,
                     "station_name": self.station.name,

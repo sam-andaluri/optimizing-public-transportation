@@ -2,20 +2,17 @@
 
 $ compose exec -T kafka kafka-topics --bootstrap-server kafka:29092 --list
 
-TURNSTILE
 TURNSTILE_SUMMARY
 __consumer_offsets
 __transaction_state
 _confluent-ksql-cta_ksql_command_topic
-_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_13-Aggregate-Aggregate-Materialize-changelog
-_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_13-Aggregate-GroupBy-repartition
-_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_15-Aggregate-Aggregate-Materialize-changelog
-_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_15-Aggregate-GroupBy-repartition
+_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-Aggregate-Aggregate-Materialize-changelog
+_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-Aggregate-GroupBy-repartition
+_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-KsqlTopic-Reduce-changelog
 _connect-configs
 _connect-offsets
 _connect-status
 _schemas
-docker.preflight
 org.chicago.cta.station.arrivals.blue.addison.v1
 org.chicago.cta.station.arrivals.blue.austin.v1
 org.chicago.cta.station.arrivals.blue.belmont.v1

@@ -5,8 +5,6 @@ import os
 
 import requests
 
-import topic_check
-
 
 logger = logging.getLogger(__name__)
 
@@ -15,22 +13,15 @@ KSQL_URL = os.getenv("KSQL_URL", "http://localhost:8088")
 
 KSQL_STATEMENTS = [
     """
-CREATE STREAM turnstile_events
-WITH (
+CREATE TABLE turnstile (
+    station_id INTEGER PRIMARY KEY,
+    station_name VARCHAR,
+    line VARCHAR
+) WITH (
     KAFKA_TOPIC='org.chicago.cta.station.turnstile.v1',
+    KEY_FORMAT='AVRO',
     VALUE_FORMAT='AVRO'
 );
-""",
-    """
-CREATE TABLE turnstile
-WITH (
-    KAFKA_TOPIC='TURNSTILE',
-    VALUE_FORMAT='JSON'
-) AS
-    SELECT STATION_ID, CAST(COUNT(STATION_ID) AS INTEGER) AS count
-    FROM turnstile_events
-    GROUP BY STATION_ID
-    EMIT CHANGES;
 """,
     """
 CREATE TABLE turnstile_summary
@@ -38,22 +29,15 @@ WITH (
     KAFKA_TOPIC='TURNSTILE_SUMMARY',
     VALUE_FORMAT='JSON'
 ) AS
-    SELECT STATION_ID, CAST(COUNT(STATION_ID) AS INTEGER) AS count
-    FROM turnstile_events
-    GROUP BY STATION_ID
-    EMIT CHANGES;
+    SELECT station_id, AS_VALUE(station_id) AS station_id_value, COUNT(station_id) AS count
+    FROM turnstile
+    GROUP BY station_id;
 """,
 ]
 
 
 def execute_statement():
     """Executes the KSQL statement against the KSQL API"""
-    if (
-        topic_check.topic_exists("TURNSTILE") is True
-        and topic_check.topic_exists("TURNSTILE_SUMMARY") is True
-    ):
-        return
-
     logging.debug("executing ksql statement...")
 
     for statement in KSQL_STATEMENTS:

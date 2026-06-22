@@ -6,16 +6,7 @@ $ ksql_post 'SHOW STREAMS; SHOW TABLES; SHOW QUERIES;'
     {
         "@type": "streams",
         "statementText": "SHOW STREAMS;",
-        "streams": [
-            {
-                "type": "STREAM",
-                "name": "TURNSTILE_EVENTS",
-                "topic": "org.chicago.cta.station.turnstile.v1",
-                "keyFormat": "KAFKA",
-                "valueFormat": "AVRO",
-                "isWindowed": false
-            }
-        ],
+        "streams": [],
         "warnings": []
     },
     {
@@ -26,16 +17,16 @@ $ ksql_post 'SHOW STREAMS; SHOW TABLES; SHOW QUERIES;'
                 "type": "TABLE",
                 "name": "TURNSTILE_SUMMARY",
                 "topic": "TURNSTILE_SUMMARY",
-                "keyFormat": "KAFKA",
+                "keyFormat": "AVRO",
                 "valueFormat": "JSON",
                 "isWindowed": false
             },
             {
                 "type": "TABLE",
                 "name": "TURNSTILE",
-                "topic": "TURNSTILE",
-                "keyFormat": "KAFKA",
-                "valueFormat": "JSON",
+                "topic": "org.chicago.cta.station.turnstile.v1",
+                "keyFormat": "AVRO",
+                "valueFormat": "AVRO",
                 "isWindowed": false
             }
         ],
@@ -46,29 +37,14 @@ $ ksql_post 'SHOW STREAMS; SHOW TABLES; SHOW QUERIES;'
         "statementText": "SHOW QUERIES;",
         "queries": [
             {
-                "queryString": "CREATE TABLE TURNSTILE_SUMMARY WITH (CLEANUP_POLICY='compact', KAFKA_TOPIC='TURNSTILE_SUMMARY', PARTITIONS=1, REPLICAS=1, RETENTION_MS=604800000, VALUE_FORMAT='JSON') AS SELECT\n  TURNSTILE_EVENTS.STATION_ID STATION_ID,\n  CAST(COUNT(TURNSTILE_EVENTS.STATION_ID) AS INTEGER) COUNT\nFROM TURNSTILE_EVENTS TURNSTILE_EVENTS\nGROUP BY TURNSTILE_EVENTS.STATION_ID\nEMIT CHANGES;",
+                "queryString": "CREATE TABLE TURNSTILE_SUMMARY WITH (CLEANUP_POLICY='compact', KAFKA_TOPIC='TURNSTILE_SUMMARY', PARTITIONS=1, REPLICAS=1, RETENTION_MS=604800000, VALUE_FORMAT='JSON') AS SELECT\n  TURNSTILE.STATION_ID STATION_ID,\n  AS_VALUE(TURNSTILE.STATION_ID) STATION_ID_VALUE,\n  COUNT(TURNSTILE.STATION_ID) COUNT\nFROM TURNSTILE TURNSTILE\nGROUP BY TURNSTILE.STATION_ID\nEMIT CHANGES;",
                 "sinks": [
                     "TURNSTILE_SUMMARY"
                 ],
                 "sinkKafkaTopics": [
                     "TURNSTILE_SUMMARY"
                 ],
-                "id": "CTAS_TURNSTILE_SUMMARY_15",
-                "statusCount": {
-                    "RUNNING": 1
-                },
-                "queryType": "PERSISTENT",
-                "state": "RUNNING"
-            },
-            {
-                "queryString": "CREATE TABLE TURNSTILE WITH (CLEANUP_POLICY='compact', KAFKA_TOPIC='TURNSTILE', PARTITIONS=1, REPLICAS=1, RETENTION_MS=604800000, VALUE_FORMAT='JSON') AS SELECT\n  TURNSTILE_EVENTS.STATION_ID STATION_ID,\n  CAST(COUNT(TURNSTILE_EVENTS.STATION_ID) AS INTEGER) COUNT\nFROM TURNSTILE_EVENTS TURNSTILE_EVENTS\nGROUP BY TURNSTILE_EVENTS.STATION_ID\nEMIT CHANGES;",
-                "sinks": [
-                    "TURNSTILE"
-                ],
-                "sinkKafkaTopics": [
-                    "TURNSTILE"
-                ],
-                "id": "CTAS_TURNSTILE_13",
+                "id": "CTAS_TURNSTILE_SUMMARY_27",
                 "statusCount": {
                     "RUNNING": 1
                 },

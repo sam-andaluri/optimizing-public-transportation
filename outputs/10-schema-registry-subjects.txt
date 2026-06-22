@@ -3,10 +3,13 @@
 $ json_get http://localhost:8081/subjects
 
 [
-    "_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_13-Aggregate-Aggregate-Materialize-changelog-value",
-    "_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_13-Aggregate-GroupBy-repartition-value",
-    "_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_15-Aggregate-Aggregate-Materialize-changelog-value",
-    "_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_15-Aggregate-GroupBy-repartition-value",
+    "TURNSTILE_SUMMARY-key",
+    "_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-Aggregate-Aggregate-Materialize-changelog-key",
+    "_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-Aggregate-Aggregate-Materialize-changelog-value",
+    "_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-Aggregate-GroupBy-repartition-key",
+    "_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-Aggregate-GroupBy-repartition-value",
+    "_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-KsqlTopic-Reduce-changelog-key",
+    "_confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27-KsqlTopic-Reduce-changelog-value",
     "org.chicago.cta.station.arrivals.blue.addison.v1-key",
     "org.chicago.cta.station.arrivals.blue.addison.v1-value",
     "org.chicago.cta.station.arrivals.blue.austin.v1-key",

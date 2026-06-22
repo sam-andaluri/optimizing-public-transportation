@@ -5,7 +5,7 @@ $ json_get http://localhost:8081/subjects/org.chicago.cta.stations-key/versions/
 {
     "subject": "org.chicago.cta.stations-key",
     "version": 1,
-    "id": 3,
+    "id": 5,
     "schema": "{\"type\":\"record\",\"name\":\"StationKey\",\"namespace\":\"com.udacity\",\"fields\":[{\"name\":\"stop_id\",\"type\":\"int\"}]}"
 }
 

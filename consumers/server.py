@@ -1,6 +1,7 @@
 """Defines a Tornado Server that consumes Kafka Event data for display"""
 import logging
 import logging.config
+import os
 from pathlib import Path
 
 import tornado.ioloop
@@ -42,6 +43,8 @@ class MainHandler(tornado.web.RequestHandler):
 
 def run_server():
     """Runs the Tornado Server and begins Kafka consumption"""
+    port = int(os.getenv("TRANSIT_STATUS_PORT", "3000"))
+
     # Configure KSQL
     ksql.execute_statement()
     if topic_check.topic_exists("TURNSTILE_SUMMARY") is False:
@@ -61,7 +64,7 @@ def run_server():
     application = tornado.web.Application(
         [(r"/", MainHandler, {"weather": weather_model, "lines": lines})]
     )
-    application.listen(3000)
+    application.listen(port)
 
     # Build kafka consumers
     consumers = [
@@ -92,7 +95,8 @@ def run_server():
     try:
         logger.info(
             "Click on the Preview button to see the Transit Status Page"
-            "If running locally - Open a web browser to http://localhost:3000 to see the Transit Status Page"
+            "If running locally - Open a web browser to http://localhost:%s to see the Transit Status Page",
+            port,
         )
         for consumer in consumers:
             tornado.ioloop.IOLoop.current().spawn_callback(consumer.consume)
