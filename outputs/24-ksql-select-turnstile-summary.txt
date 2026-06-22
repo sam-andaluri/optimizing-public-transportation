@@ -2,7 +2,7 @@
 
 $ compose exec -T ksql-server ksql http://ksql-server:8088 --execute 'SELECT * FROM TURNSTILE_SUMMARY LIMIT 10;'
 
-Jun 22, 2026 5:31:13 PM org.jline.utils.Log logr
+Jun 22, 2026 5:41:50 PM org.jline.utils.Log logr
 WARNING: Unable to create a system terminal, creating a dumb terminal (enable debug logging for more information)
 +-----+-----+-----+
 |STATI|STATI|COUNT|

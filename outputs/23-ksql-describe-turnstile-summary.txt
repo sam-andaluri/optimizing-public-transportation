@@ -71,14 +71,14 @@ $ ksql_post 'DESCRIBE TURNSTILE_SUMMARY;'
                 {
                     "name": "messages-per-sec",
                     "host": "ksql-server:8088",
-                    "value": 15.15151515151515,
-                    "timestamp": 1782149463094
+                    "value": 16.583597643860443,
+                    "timestamp": 1782150098350
                 },
                 {
                     "name": "total-messages",
                     "host": "ksql-server:8088",
-                    "value": 4612.0,
-                    "timestamp": 1782149463094
+                    "value": 15372.0,
+                    "timestamp": 1782150098350
                 }
             ],
             "clusterErrorStats": []

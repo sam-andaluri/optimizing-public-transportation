@@ -1,15 +1,13 @@
 # Transit Status UI HTTP response
 
-$ curl -fsS -D - -o /dev/null http://localhost:3000/
+$ curl -fsS -D - -o /dev/null http://localhost:3001/
 
 HTTP/1.1 200 OK
-X-Powered-By: Express
-Content-Type: text/html; charset=utf-8
-Content-Length: 44
-ETag: W/"2c-gnr1qVb4ebe/Q3epRmYetyK6XvE"
-Date: Mon, 22 Jun 2026 17:31:19 GMT
-Connection: keep-alive
-Keep-Alive: timeout=5
+Server: TornadoServer/6.2
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 22 Jun 2026 17:41:55 GMT
+Etag: "0eeb3432983abaea95411d0b72e3ea9c52503702"
+Content-Length: 12071
 
 
 # exit status: 0

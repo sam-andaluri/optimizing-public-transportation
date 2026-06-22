@@ -22,7 +22,8 @@ compose() {
 }
 
 timestamp="$(date +%Y%m%d-%H%M%S)"
-OUT_DIR="${1:-outputs/rubric-evidence-${timestamp}}"
+OUT_DIR="${1:-outputs}"
+TRANSIT_STATUS_PORT="${TRANSIT_STATUS_PORT:-3001}"
 mkdir -p "$OUT_DIR"
 
 run_capture() {
@@ -120,6 +121,7 @@ been running long enough to produce data.
 
 Compose command: ${COMPOSE_CMD[*]}
 Output folder: ${OUT_DIR}
+Transit Status UI URL: http://localhost:${TRANSIT_STATUS_PORT}
 EOF
 
 run_capture "00-compose-services" "Compose service status" compose ps
@@ -181,9 +183,9 @@ run_shell "24-ksql-select-turnstile-summary" "KSQL turnstile summary rows with s
   "compose exec -T ksql-server ksql http://ksql-server:8088 --execute 'SELECT * FROM TURNSTILE_SUMMARY LIMIT 10;'"
 
 run_shell "25-ui-http" "Transit Status UI HTTP response" \
-  "curl -fsS -D - -o /dev/null http://localhost:3000/"
+  "curl -fsS -D - -o /dev/null http://localhost:${TRANSIT_STATUS_PORT}/"
 run_shell "26-ui-html-snapshot" "Transit Status UI HTML snapshot" \
-  "curl -fsS http://localhost:3000/"
+  "curl -fsS http://localhost:${TRANSIT_STATUS_PORT}/"
 
 cat <<EOF
 

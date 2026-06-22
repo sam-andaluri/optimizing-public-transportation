@@ -73,20 +73,20 @@ $ ksql_post 'DESCRIBE TURNSTILE;'
                 {
                     "name": "consumer-messages-per-sec",
                     "host": "ksql-server:8088",
-                    "value": 137.6001760898058,
-                    "timestamp": 1782149461387
+                    "value": 201.75465133867795,
+                    "timestamp": 1782150100661
                 },
                 {
                     "name": "consumer-total-messages",
                     "host": "ksql-server:8088",
-                    "value": 34977.0,
-                    "timestamp": 1782149461387
+                    "value": 297436.0,
+                    "timestamp": 1782150100661
                 },
                 {
                     "name": "consumer-total-bytes",
                     "host": "ksql-server:8088",
-                    "value": 1065948.0,
-                    "timestamp": 1782149461387
+                    "value": 9075272.0,
+                    "timestamp": 1782150100661
                 }
             ],
             "clusterErrorStats": [

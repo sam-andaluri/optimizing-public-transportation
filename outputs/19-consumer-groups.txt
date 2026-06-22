@@ -2,17 +2,17 @@
 
 $ compose exec -T kafka kafka-consumer-groups --bootstrap-server kafka:29092 --list
 
+console-consumer-86358
 cta-org.chicago.cta.weather.v1
-console-consumer-12588
 _confluent-ksql-cta_ksqlquery_CTAS_TURNSTILE_SUMMARY_27
-console-consumer-21182
-console-consumer-44911
+console-consumer-30711
 cta-_org.chicago.cta.station.arrivals.
+console-consumer-97111
 cta-org.chicago.cta.stations.table.v1
 stations-stream
-console-consumer-10932
-console-consumer-93105
+console-consumer-79004
 cta-TURNSTILE_SUMMARY
-console-consumer-38312
+console-consumer-91315
+console-consumer-5544
 
 # exit status: 0

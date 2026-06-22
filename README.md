@@ -163,19 +163,19 @@ http://localhost:3001
 
 ## Capture Evidence
 
-After the stack, simulation, Faust worker, and UI have been running for a minute, capture the project checks into an `outputs/` folder:
+After the stack, simulation, Faust worker, and UI have been running for a minute, capture the project checks into the `outputs/` folder:
 
 ```bash
 ./scripts/collect_rubric_evidence.sh
 ```
 
-The script creates a timestamped folder such as:
+The script writes files such as `outputs/01-kafka-topics-all.txt`, `outputs/17-connect-status.txt`, and `outputs/26-ui-html-snapshot.txt`. Each file contains the command that was run, the command output, and the exit status. The checks cover Kafka topics, sample messages, Schema Registry subjects, Kafka Connect configuration, Faust output, KSQL tables, and the UI HTTP response.
 
-```text
-outputs/rubric-evidence-20260616-103000/
+The evidence script checks the UI at port `3001` by default. If you run the UI on another port, pass it with `TRANSIT_STATUS_PORT`:
+
+```bash
+TRANSIT_STATUS_PORT=3002 ./scripts/collect_rubric_evidence.sh
 ```
-
-Each file contains the command that was run, the command output, and the exit status. The checks cover Kafka topics, sample messages, Schema Registry subjects, Kafka Connect configuration, Faust output, KSQL tables, and the UI HTTP response.
 
 To choose a specific output folder:
 
